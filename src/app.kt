@@ -5,6 +5,7 @@ import javafx.stage.Stage
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.TextArea
+import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 
 class HelloWorld : Application()
@@ -16,16 +17,23 @@ class HelloWorld : Application()
 //        }
 //    }
 
-    private var btn = Button()
+    private var btn1 = Button()
+    private var btn2 = Button()
     private var textArea = TextArea("Empty")
 
     override fun start(stage: Stage) {
         stage.setTitle("Hello World!")
 
-        btn.setText("Say 'Hello World'")
-        btn.setOnAction { OnPushButton() }
+        btn1.setText("Button1")
+        btn1.setOnAction { OnPushButton1() }
 
-        val vBox = VBox(textArea, btn)
+        btn2.setText("Button2")
+        btn2.setOnAction { OnPushButton2() }
+
+        val hBox = HBox(btn1, btn2)
+        hBox.spacing = 15.0
+
+        val vBox = VBox(textArea, hBox)
         vBox.spacing = 15.0
         vBox.alignment = Pos.TOP_CENTER
 
@@ -33,9 +41,14 @@ class HelloWorld : Application()
         stage.show()
     }
 
-    private fun OnPushButton()
+    private fun OnPushButton1()
     {
         textArea.text = "Hello world!"
+    }
+
+    private fun OnPushButton2()
+    {
+        textArea.text = "Push button 2"
     }
 }
 
