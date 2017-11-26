@@ -63,7 +63,7 @@
         </Label>
             <VBox layoutX="7.0" prefHeight="375.0" prefWidth="633.0" spacing="10.0">
                <children>
-                  <Label prefHeight="17.0" prefWidth="593.0" text="Kotlin plus JavFX is not so complex" />
+                  <Label prefHeight="17.0" prefWidth="593.0" text="Kotlin and JavaFX are not so complex" />
                   <TextArea prefHeight="322.0" prefWidth="593.0" />
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                     <buttons>
