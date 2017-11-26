@@ -10,13 +10,6 @@ import javafx.scene.layout.VBox
 
 class HelloWorld : Application()
 {
-//    companion object {
-//        @JvmStatic
-//        fun main(args: Array<String>) {
-//            launch(HelloWorld::class.java)
-//        }
-//    }
-
     private var btn1 = Button()
     private var btn2 = Button()
     private var textArea = TextArea("Empty")
