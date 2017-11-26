@@ -1,38 +1,48 @@
 import javafx.application.Application
 import javafx.application.Application.launch
+import javafx.event.ActionEvent
+import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.TextArea
-import javafx.scene.input.DataFormat.URL
+import javafx.scene.layout.VBox
 import javafx.stage.Stage
 
 class HelloWorld : Application()
 {
-    private var btn1 = Button()
-    private var btn2 = Button()
-    private var textArea = TextArea("Empty")
+    @FXML private var mainLayout: VBox?   = null
+    @FXML private var closeBtn  : Button? = null
+          private var window    : Stage?  = null
+          private var scene     : Scene?  = null
 
     override fun start(stage: Stage) {
         val root : Parent = FXMLLoader.load(javaClass.getResource("kotGui.fxml"))
         //btn1.setOnAction { OnPushButton1() }
         //btn2.setOnAction { OnPushButton2() }
 
-        stage.setTitle("JavaFX GUI demo")
-        stage.setScene(Scene(root))
+        scene = Scene(root)
+        println("${scene}")
+        stage.title = "JavaFX GUI demo"
+        stage.scene = scene
         stage.show()
     }
 
-    private fun OnPushButton1()
+    private fun myOnShown()
     {
-        textArea.text = "Hello world!"
+        println ("${mainLayout}")
     }
 
-    private fun OnPushButton2()
+    @FXML private fun onButtonClose(event : ActionEvent)
     {
-        textArea.text = "Push button 2"
+        event.consume()
+        println("${scene}")
+        val window = mainLayout!!.getScene().getWindow() as Stage
+        println("Window: ${window}")
+        val stage = closeBtn!!.getScene().getWindow() as Stage
+        //stage.close()
+        println("Window: ${window}")
+        println("FXML: ${stage}")
     }
 }
 

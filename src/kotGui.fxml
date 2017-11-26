@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="mainLayout" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HelloWorld">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -67,7 +67,7 @@
                   <TextArea prefHeight="322.0" prefWidth="593.0" />
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Close" />
+                      <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#onButtonClose" text="Close" />
                         <Button mnemonicParsing="false" text="Open" />
                         <Button mnemonicParsing="false" text="Save" />
                     </buttons>
