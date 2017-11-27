@@ -8,35 +8,8 @@ import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
+import javafx.stage.Modality
 import javafx.stage.Stage
-
-class SampleController
-{
-    @FXML private var result : Label? = null
-    @FXML private var btnYes : Button? = null
-    @FXML private var btnNo  : Button? = null
-
-    fun setStageAndSetupListeners(stage: Stage)
-    {
-        println(btnYes);
-    }
-
-    @FXML private fun onBtnYes()
-    {
-        println("Yes")
-        result?.text = "Yes"
-        val stage = btnYes?.getScene()?.getWindow() as Stage
-        stage.close()
-    }
-
-    @FXML private fun onBtnNo()
-    {
-        println("No")
-        result?.text = "No"
-        val stage = btnNo?.getScene()?.getWindow() as Stage
-        stage.close()
-    }
-}
 
 class HelloWorld : Application()
 {
@@ -45,33 +18,33 @@ class HelloWorld : Application()
 
     override fun start(stage: Stage) {
         val root : Parent = FXMLLoader.load(javaClass.getResource("kotGui.fxml"))
-        //btn1.setOnAction { OnPushButton1() }
-        //btn2.setOnAction { OnPushButton2() }
-
         stage.title = "JavaFX GUI demo"
         stage.scene = Scene(root)
         stage.show()
-
-        val loader = FXMLLoader(javaClass.getResource("confirmDialog.fxml"))
-        val root2 = loader.load<Any>() as Parent
-        val scene2 = Scene(root2)
-        val stage2 = Stage()
-        stage2.scene = scene2
-        stage2.show()
-
-        val controller = loader.getController<Any>() as SampleController
-        controller.setStageAndSetupListeners(stage)
     }
 
     @FXML private fun onButtonClose(event : ActionEvent)
     {
-        val stage = closeBtn?.getScene()?.getWindow() as Stage
-        val diag = confirmDialog()
+        val parentStage = closeBtn?.getScene()?.getWindow() as Stage
 
-        println(diag.doModal(stage))
+        val loader = FXMLLoader(javaClass.getResource("confirmDialog.fxml"))
+        val root = loader.load<Any>() as Parent
+        val scene = Scene(root)
+        val stage = Stage()
+        stage.scene = scene
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parentStage);
+
+        val controller = loader.getController<Any>() as confirmDialog
+
+        stage.showAndWait()
+
+        if (controller.result)
+        {
+            parentStage.close()
+        }
 
         event.consume()
-        //stage.close()
     }
 }
 
