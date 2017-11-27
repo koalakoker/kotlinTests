@@ -29,9 +29,8 @@ class HelloWorld : Application()
         val stage = closeBtn?.getScene()?.getWindow() as Stage
         val diag = confirmDialog()
 
-        diag.doModal(stage)
-        println(diag.retVal)
-        println(diag.C_ID)
+        println(diag.doModal(stage))
+
         event.consume()
         //stage.close()
     }

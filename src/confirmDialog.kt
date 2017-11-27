@@ -3,20 +3,23 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Button
+import javafx.scene.control.Label
 import javafx.stage.Modality
 import javafx.stage.Stage
 
 class confirmDialog(retValInit: Int = 0)
 {
-    var retVal = retValInit
-
-    var C_ID = "ID"
-
     @FXML private var btnYes : Button? = null
     @FXML private var btnNo  : Button? = null
+    @FXML private var result : Label ? = null
 
-    fun doModal(parentStage : Stage)
+    fun doModal(parentStage : Stage) : String?
     {
+        val loader = FXMLLoader(javaClass.getResource("MyGui.fxml"))
+        val root = loader.load<Any>() as Parent
+        val controller = loader.getController<Any>() as MyController
+        controller.setStageAndSetupListeners(stage) // or what you want to do
+
         val root : Parent = FXMLLoader.load(javaClass.getResource("confirmDialog.fxml"))
         val stage = Stage()
         stage.initOwner(parentStage);
@@ -24,38 +27,24 @@ class confirmDialog(retValInit: Int = 0)
         stage.title = "Closing app"
         stage.scene = Scene(root)
         stage.showAndWait()
-        println("$retVal")
+        println(result?.text)
+        return result?.text
     }
 
     @FXML private fun onBtnYes()
     {
         println("Yes")
-        execOnBtnYes()
+        result?.text = "Yes"
         val stage = btnYes?.getScene()?.getWindow() as Stage
         //stage.close()
-    }
-
-    private fun execOnBtnYes()
-    {
-        println("$retVal")
-        retVal = 1
-        println("$retVal")
-        C_ID = "Yes"
     }
 
     @FXML private fun onBtnNo()
     {
         println("No")
-        execOnBtnNo()
+        result?.text = "No"
         val stage = btnNo?.getScene()?.getWindow() as Stage
         //stage.close()
-        C_ID = "No"
     }
 
-    private fun execOnBtnNo()
-    {
-        println("$retVal")
-        retVal = 2
-        println("$retVal")
-    }
 }
