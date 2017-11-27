@@ -15,13 +15,14 @@ class confirmDialog(retValInit: Int = 0)
 
     fun doModal(parentStage : Stage) : String?
     {
-        val loader = FXMLLoader(javaClass.getResource("MyGui.fxml"))
-        val root = loader.load<Any>() as Parent
-        val controller = loader.getController<Any>() as MyController
-        controller.setStageAndSetupListeners(stage) // or what you want to do
-
-        val root : Parent = FXMLLoader.load(javaClass.getResource("confirmDialog.fxml"))
         val stage = Stage()
+
+        val loader = FXMLLoader(javaClass.getResource("confirmDialog.fxml"))
+        val root = loader.load<Any>() as Parent
+        val controller = loader.getController<Any>() as confirmDialog
+        //controller.setStageAndSetupListeners(stage) // or what you want to do
+
+        //val root : Parent = FXMLLoader.load(javaClass.getResource("confirmDialog.fxml"))
         stage.initOwner(parentStage);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.title = "Closing app"
