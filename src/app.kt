@@ -11,19 +11,12 @@ import javafx.scene.layout.VBox
 import javafx.stage.Modality
 import javafx.stage.Stage
 
-class HelloWorld : Application()
+class KotGui
 {
     @FXML private var mainLayout: VBox?   = null
     @FXML private var closeBtn  : Button? = null
 
-    override fun start(stage: Stage) {
-        val root : Parent = FXMLLoader.load(javaClass.getResource("kotGui.fxml"))
-        stage.title = "JavaFX GUI demo"
-        stage.scene = Scene(root)
-        stage.show()
-    }
-
-    @FXML private fun onButtonClose(event : ActionEvent)
+    @FXML fun onButtonClose(event : ActionEvent) : Boolean
     {
         val parentStage = closeBtn?.getScene()?.getWindow() as Stage
 
@@ -45,6 +38,30 @@ class HelloWorld : Application()
         }
 
         event.consume()
+        return controller.result
+    }
+}
+
+class HelloWorld : Application()
+{
+    override fun start(stage: Stage) {
+        val loader = FXMLLoader(javaClass.getResource("kotGui.fxml"))
+        val root = loader.load<Any>() as Parent
+        val scene = Scene(root)
+
+        stage.scene = scene
+        stage.title = "JavaFX GUI demo"
+
+        val controller = loader.getController<Any>() as KotGui
+
+        stage.setOnCloseRequest({e ->
+                    if (!controller.onButtonClose(ActionEvent()))
+                    {
+                        e.consume()
+                    }
+        })
+
+        stage.show()
     }
 }
 

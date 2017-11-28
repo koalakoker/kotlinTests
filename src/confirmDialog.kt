@@ -15,7 +15,6 @@ class confirmDialog
 
     @FXML private fun onBtnYes()
     {
-        println("Yes")
         result = true
         val stage = btnYes?.getScene()?.getWindow() as Stage
         stage.close()
@@ -23,7 +22,6 @@ class confirmDialog
 
     @FXML private fun onBtnNo()
     {
-        println("No")
         val stage = btnNo?.getScene()?.getWindow() as Stage
         stage.close()
     }
