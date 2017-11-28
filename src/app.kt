@@ -7,6 +7,7 @@ import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.TextArea
 import javafx.scene.layout.VBox
 import javafx.stage.Modality
 import javafx.stage.Stage
@@ -15,10 +16,12 @@ class KotGui
 {
     @FXML private var mainLayout: VBox?   = null
     @FXML private var closeBtn  : Button? = null
+    @FXML private var textArea : TextArea? = null
+    var parentStage : Stage? = null
 
-    @FXML fun onButtonClose(event : ActionEvent) : Boolean
+    @FXML fun onBtnClose(event : ActionEvent) : Boolean
     {
-        val parentStage = closeBtn?.getScene()?.getWindow() as Stage
+        //val parentStage = closeBtn?.getScene()?.getWindow() as Stage
 
         val loader = FXMLLoader(javaClass.getResource("confirmDialog.fxml"))
         val root = loader.load<Any>() as Parent
@@ -27,18 +30,35 @@ class KotGui
         stage.scene = scene
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(parentStage);
-
         val controller = loader.getController<Any>() as confirmDialog
-
         stage.showAndWait()
 
         if (controller.result)
         {
-            parentStage.close()
+            parentStage?.close()
         }
 
         event.consume()
         return controller.result
+    }
+
+    @FXML fun onBtnCode(event : ActionEvent)
+    {
+        textArea?.text = javaClass.getResource("kotGui.fxml").readText()
+        event.consume()
+    }
+
+    @FXML fun onBtnAbout(event : ActionEvent)
+    {
+        val loader = FXMLLoader(javaClass.getResource("about.fxml"))
+        val root = loader.load<Any>() as Parent
+        val scene = Scene(root)
+        val stage = Stage()
+        stage.scene = scene
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(parentStage);
+        stage.showAndWait()
+        event.consume()
     }
 }
 
@@ -53,9 +73,10 @@ class HelloWorld : Application()
         stage.title = "JavaFX GUI demo"
 
         val controller = loader.getController<Any>() as KotGui
+        controller.parentStage = stage
 
         stage.setOnCloseRequest({e ->
-                    if (!controller.onButtonClose(ActionEvent()))
+                    if (!controller.onBtnClose(ActionEvent()))
                     {
                         e.consume()
                     }

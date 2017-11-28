@@ -30,7 +30,7 @@
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Preferences…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem mnemonicParsing="false" onAction="#onBtnClose" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
@@ -49,7 +49,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem mnemonicParsing="false" onAction="#onBtnAbout" text="About MyHelloApp" />
           </items>
         </Menu>
       </menus>
@@ -64,12 +64,12 @@
             <VBox layoutX="7.0" prefHeight="375.0" prefWidth="633.0" spacing="10.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="593.0" text="Kotlin and JavaFX are not so complex" />
-                  <TextArea prefHeight="322.0" prefWidth="593.0" />
+                  <TextArea fx:id="textArea" prefHeight="322.0" prefWidth="593.0" />
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#onButtonClose" text="Close" />
-                        <Button mnemonicParsing="false" text="Open" />
-                        <Button mnemonicParsing="false" text="Save" />
+                      <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#onBtnClose" text="Close" />
+                        <Button mnemonicParsing="false" onAction="#onBtnCode" text="Code" />
+                        <Button mnemonicParsing="false" onAction="#onBtnAbout" text="About" />
                     </buttons>
                   </ButtonBar>
                </children>
