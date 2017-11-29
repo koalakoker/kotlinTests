@@ -6,11 +6,14 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Button
-import javafx.scene.control.Label
 import javafx.scene.control.TextArea
+import javafx.scene.image.Image
 import javafx.scene.layout.VBox
 import javafx.stage.Modality
 import javafx.stage.Stage
+import javax.swing.ImageIcon
+
+
 
 class KotGui
 {
@@ -83,6 +86,14 @@ class HelloWorld : Application()
         })
 
         stage.show()
+
+        val img: Image = Image( javaClass.getResourceAsStream("Hello-icon.png") )
+        stage.icons.add(img)
+
+        val iconURL = javaClass.getResource("Hello-icon.png")
+        val image = ImageIcon(iconURL).getImage()
+        java.awt.Taskbar.getTaskbar().iconImage = image
+
     }
 }
 
