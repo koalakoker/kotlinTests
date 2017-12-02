@@ -90,9 +90,16 @@ class HelloWorld : Application()
         val img: Image = Image( javaClass.getResourceAsStream("Hello-icon.png") )
         stage.icons.add(img)
 
-        val iconURL = javaClass.getResource("Hello-icon.png")
-        val image = ImageIcon(iconURL).getImage()
-        java.awt.Taskbar.getTaskbar().iconImage = image
+        try
+        {
+            val iconURL = javaClass.getResource("Hello-icon.png")
+            val image = ImageIcon(iconURL).getImage()
+            java.awt.Taskbar.getTaskbar().iconImage = image
+        }
+        catch (e : Exception)
+        {
+            println ("ICONIMAGE not supported in ths platform")
+        }
 
     }
 }
